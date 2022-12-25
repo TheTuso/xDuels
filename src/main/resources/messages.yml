@@ -1,0 +1,5 @@
+system:
+  hello: Hello!
+command:
+  usage: usage
+  reload: <color:#6fff00>Configuration files have been reloaded!</color>
