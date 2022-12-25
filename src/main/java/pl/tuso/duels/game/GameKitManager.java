@@ -75,7 +75,10 @@ public class GameKitManager implements KitManager {
 
     @Override
     public boolean saveKit(@NotNull GameKit gameKit) {
-        if (gameKit.getEquipment().isEmpty()) return false;
+        if (gameKit.getEquipment().isEmpty()) {
+            this.duels.getLogger().warning(String.format("The equipment of the kit cannot be empty (%s)!", gameKit.getPlainName()));
+            return false;
+        }
         if (this.gameKits.stream().anyMatch(kit -> kit.getPlainName().equalsIgnoreCase(gameKit.getPlainName()))) {
             this.duels.getLogger().warning(String.format("There is already a kit with this name (%s)!", gameKit.getPlainName()));
             return false;
