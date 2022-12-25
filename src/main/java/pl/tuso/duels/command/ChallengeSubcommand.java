@@ -49,6 +49,10 @@ public class ChallengeSubcommand implements PaperSubcommand {
                 return false;
             }
             final Challenge challenge = this.duels.getGameSystem().getGameChallengeManager().createChallange(whoGamePlayer, whomGamePlayer, kit);
+            if (challenge == null) {
+                sender.sendMessage(this.duels.getMessages().getLine("command.challenge.duplicate", name));
+                return false;
+            }
             challenge.announce();
             return true;
         }
