@@ -24,8 +24,8 @@ public class GameChallengeManager implements ChallengeManager {
 
     @Override
     public Challenge createChallange(DuelPlayer sender, DuelPlayer receiver, Kit kit) { // TODO challenge system
+        if (this.getChallenge(sender, receiver, kit) != null) return null;
         final GameChallenge gameChallenge = new GameChallenge(this.duels, sender, receiver, kit);
-        if (this.challanges.contains(gameChallenge)) return null;
         this.challanges.add(gameChallenge);
         return gameChallenge;
     }
