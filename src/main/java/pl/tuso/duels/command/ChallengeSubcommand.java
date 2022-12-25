@@ -27,7 +27,7 @@ public class ChallengeSubcommand implements PaperSubcommand {
             if (args.length < 2) return this.unknownSubcommand.execute(sender, subCommand, args);
             final Player whom = this.duels.getServer().getPlayer(args[1]);
             if (whom == null) {
-                sender.sendMessage(this.duels.getMessages().getLine("command.unknown.player"));
+                sender.sendMessage(this.duels.getMessages().getLine("command.unknown.player", args[1]));
                 return false;
             }
             if (who.getUniqueId().equals(whom.getUniqueId())) {
