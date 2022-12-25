@@ -1,6 +1,7 @@
 package pl.tuso.duels.game;
 
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.tuso.duels.Duels;
 import pl.tuso.duels.api.Kit;
@@ -63,7 +64,7 @@ public class GameKitManager implements KitManager {
             this.duels.getLogger().warning(String.format("There is already a kit with the same name! Please change the name field in %s!", fileName));
             return false;
         }
-        return gameKit != null ? this.gameKits.add(gameKit) : false;
+        return gameKit != null && !gameKit.getEquipment().isEmpty() ? this.gameKits.add(gameKit) : false;
     }
 
     @Override
@@ -73,7 +74,8 @@ public class GameKitManager implements KitManager {
     }
 
     @Override
-    public boolean saveKit(GameKit gameKit) {
+    public boolean saveKit(@NotNull GameKit gameKit) {
+        if (gameKit.getEquipment().isEmpty()) return false;
         if (this.gameKits.stream().anyMatch(kit -> kit.getPlainName().equalsIgnoreCase(gameKit.getPlainName()))) {
             this.duels.getLogger().warning(String.format("There is already a kit with this name (%s)!", gameKit.getPlainName()));
             return false;
