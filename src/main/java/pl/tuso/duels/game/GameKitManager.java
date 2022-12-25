@@ -64,7 +64,12 @@ public class GameKitManager implements KitManager {
             this.duels.getLogger().warning(String.format("There is already a kit with the same name! Please change the name field in %s!", fileName));
             return false;
         }
-        return gameKit != null && !gameKit.getEquipment().isEmpty() ? this.gameKits.add(gameKit) : false;
+        if (gameKit == null) return false;
+        if (gameKit.getEquipment().isEmpty()) {
+            this.duels.getLogger().warning(String.format("The equipment of the kit cannot be empty (%s)!", gameKit.getPlainName()));
+            return false;
+        }
+        return this.gameKits.add(gameKit);
     }
 
     @Override
