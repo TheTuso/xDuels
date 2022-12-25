@@ -40,9 +40,9 @@ class GameChallenge implements Challenge {
 
     @Override
     public void announce() { // TODO generate accept and deny buttons
-        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.who",
+        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.sender",
                 this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
-        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.whom",
+        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.receiver",
                 this.sender.getSerializedDisplayName(),
                 this.receiver.getSerializedDisplayName(),
                 this.kit.getSerializedName(),
