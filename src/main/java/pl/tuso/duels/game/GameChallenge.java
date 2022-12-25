@@ -25,24 +25,24 @@ class GameChallenge implements Challenge {
     @Override
     public boolean accept() { //TODO accept system -> create game
         this.duels.getGameSystem().getGameChallengeManager().getChallenges().remove(this);
-        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.accepted.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
-        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.accepted.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
+        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
+        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         return false;
     }
 
     @Override
-    public boolean deny() { //TODO deny system -> info
+    public boolean deny() {
         this.duels.getGameSystem().getGameChallengeManager().getChallenges().remove(this);
-        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.denied.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
-        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.denied.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
+        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.denied.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
+        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.denied.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         return false;
     }
 
     @Override
-    public void announce() { // TODO generate accept and deny buttons
-        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.sender",
+    public void announce() {
+        this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.announce.sender",
                 this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
-        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("challenge.announce.receiver",
+        this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.announce.receiver",
                 this.sender.getSerializedDisplayName(),
                 this.receiver.getSerializedDisplayName(),
                 this.kit.getSerializedName(),
@@ -66,14 +66,14 @@ class GameChallenge implements Challenge {
     }
 
     private @NotNull String serializedAcceptButton() {
-        return MiniMessage.miniMessage().serialize(this.duels.getMessages().getLine("challenge.announce.button.accept.display")
-                .hoverEvent(HoverEvent.showText(this.duels.getMessages().getLine("challenge.announce.button.accept.hover")))
+        return MiniMessage.miniMessage().serialize(this.duels.getMessages().getLine("command.challenge.announce.button.accept.display")
+                .hoverEvent(HoverEvent.showText(this.duels.getMessages().getLine("command.challenge.announce.button.accept.hover")))
                 .clickEvent(ClickEvent.runCommand(String.format("/duels accept %s %s", this.sender.getHandle().getName(), this.kit.getPlainName()))));
     }
 
     private @NotNull String serializedDenyButton() {
-        return MiniMessage.miniMessage().serialize(this.duels.getMessages().getLine("challenge.announce.button.deny.display")
-                .hoverEvent(HoverEvent.showText(this.duels.getMessages().getLine("challenge.announce.button.deny.hover")))
+        return MiniMessage.miniMessage().serialize(this.duels.getMessages().getLine("command.challenge.announce.button.deny.display")
+                .hoverEvent(HoverEvent.showText(this.duels.getMessages().getLine("command.challenge.announce.button.deny.hover")))
                 .clickEvent(ClickEvent.runCommand(String.format("/duels deny %s %s", this.sender.getHandle().getName(), this.kit.getPlainName()))));
     }
 }
