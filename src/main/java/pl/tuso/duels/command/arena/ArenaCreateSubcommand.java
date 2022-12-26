@@ -9,12 +9,12 @@ import pl.tuso.duels.api.Arena;
 import pl.tuso.duels.command.UnknownSubcommand;
 import pl.tuso.duels.game.GameArena;
 
-public class ArenaSaveSubcommand implements PaperSubcommand {
+public class ArenaCreateSubcommand implements PaperSubcommand {
     private final Duels duels;
     private final String adminPermission;
     private final UnknownSubcommand unknownSubcommand;
 
-    public ArenaSaveSubcommand(Duels duels, String adminPermission, UnknownSubcommand unknownSubcommand) {
+    public ArenaCreateSubcommand(Duels duels, String adminPermission, UnknownSubcommand unknownSubcommand) {
         this.duels = duels;
         this.adminPermission = adminPermission;
         this.unknownSubcommand = unknownSubcommand;
@@ -32,10 +32,10 @@ public class ArenaSaveSubcommand implements PaperSubcommand {
             serializedName = serializedName.trim();
             final Arena arena = new GameArena(serializedName, player.getLocation(), player.getLocation());
             if (this.duels.getGameSystem().getArenaManager().saveArena(arena)) {
-                sender.sendMessage(this.duels.getMessages().getLine("command.arena.save.success", arena.getSerializedName()));
+                sender.sendMessage(this.duels.getMessages().getLine("command.arena.create.success", arena.getSerializedName()));
                 return true;
             } else {
-                sender.sendMessage(this.duels.getMessages().getLine("command.arena.save.fail", arena.getSerializedName()));
+                sender.sendMessage(this.duels.getMessages().getLine("command.arena.create.fail", arena.getSerializedName()));
                 return false;
             }
         }

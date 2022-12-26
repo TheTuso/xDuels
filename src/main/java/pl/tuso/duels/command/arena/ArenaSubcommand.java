@@ -12,7 +12,7 @@ public class ArenaSubcommand implements PaperSubcommand {
     private final Duels duels;
     private final String adminPermission;
     private final UnknownSubcommand unknownSubcommand;
-    private final ArenaSaveSubcommand arenaSaveSubcommand;
+    private final ArenaCreateSubcommand arenaCreateSubcommand;
     private final ArenaRemoveSubcommand arenaRemoveSubcommand;
     private final ArenaListSubcommand arenaListSubcommand;
 
@@ -20,7 +20,7 @@ public class ArenaSubcommand implements PaperSubcommand {
         this.duels = duels;
         this.adminPermission = adminPermission;
         this.unknownSubcommand = unknownSubcommand;
-        this.arenaSaveSubcommand = new ArenaSaveSubcommand(this.duels, this.adminPermission, this.unknownSubcommand);
+        this.arenaCreateSubcommand = new ArenaCreateSubcommand(this.duels, this.adminPermission, this.unknownSubcommand);
         this.arenaRemoveSubcommand = new ArenaRemoveSubcommand(this.duels, this.adminPermission, this.unknownSubcommand);
         this.arenaListSubcommand = new ArenaListSubcommand(this.duels);
     }
@@ -29,7 +29,7 @@ public class ArenaSubcommand implements PaperSubcommand {
     public boolean execute(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (args.length < 2) return this.unknownSubcommand.execute(sender, subCommand, args);
         return switch (args[1].toLowerCase()) {
-            case "save" -> this.arenaSaveSubcommand.execute(sender, args[1].toLowerCase(), args);
+            case "create" -> this.arenaCreateSubcommand.execute(sender, args[1].toLowerCase(), args);
             case "remove" -> this.arenaRemoveSubcommand.execute(sender, args[1].toLowerCase(), args);
             case "list" -> this.arenaListSubcommand.execute(sender, args[1].toLowerCase(), args);
             default -> this.unknownSubcommand.execute(sender, args[1].toLowerCase(), args);
@@ -39,7 +39,7 @@ public class ArenaSubcommand implements PaperSubcommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (args.length < 2) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
-        return args.length == 2 ? sender.hasPermission(this.adminPermission) ? List.of("save", "remove", "list") : List.of("list") :
+        return args.length == 2 ? sender.hasPermission(this.adminPermission) ? List.of("create", "remove", "list") : List.of("list") :
                 args.length > 2 ? switch (args[1].toLowerCase()) {
                     case "remove" -> this.arenaRemoveSubcommand.tabComplete(sender, args[1].toLowerCase(), args);
                     default -> this.unknownSubcommand.tabComplete(sender, args[1].toLowerCase(), args);

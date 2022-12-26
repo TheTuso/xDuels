@@ -14,7 +14,7 @@ import pl.tuso.duels.command.kit.KitSubcommand;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DuelsCommand implements TabExecutor {
+public class DuelsCommand implements TabExecutor { // TODO check permission when tab complete
     private final Duels duels;
     private final String adminPermission;
     private final UnknownSubcommand unknownSubcommand;
