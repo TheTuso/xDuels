@@ -16,8 +16,8 @@ public class Duels extends JavaPlugin {
 
         this.messages = new Messages(this);
         this.gameSystem = new GameSystem(this);
-
-        this.gameSystem.getGameKitManager().reloadKits();
+        this.gameSystem.getKitManager().reloadKits();
+        this.gameSystem.getArenaManager().reloadArenas();
 
         this.getLogger().info(PlainTextComponentSerializer.plainText().serialize(this.messages.getLine("system.hello")));
 

@@ -8,6 +8,7 @@ import org.bukkit.command.TabExecutor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.tuso.duels.Duels;
+import pl.tuso.duels.command.arena.ArenaSubcommand;
 import pl.tuso.duels.command.kit.KitSubcommand;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class DuelsCommand implements TabExecutor {
     private final AcceptSubcommand acceptSubcommand;
     private final DenySubcommand denySubcommand;
     private final KitSubcommand kitSubcommand;
+    private final ArenaSubcommand arenaSubcommand;
     private final ReloadSubcommand reloadSubcommand;
 
     public DuelsCommand(Duels duels) {
@@ -31,6 +33,7 @@ public class DuelsCommand implements TabExecutor {
         this.acceptSubcommand = new AcceptSubcommand(this.duels, this.unknownSubcommand);
         this.denySubcommand = new DenySubcommand(this.duels, this.unknownSubcommand);
         this.kitSubcommand = new KitSubcommand(this.duels, this.adminPermission, this.unknownSubcommand);
+        this.arenaSubcommand = new ArenaSubcommand(this.duels, this.adminPermission, this.unknownSubcommand);
         this.reloadSubcommand = new ReloadSubcommand(this.duels, this.adminPermission);
 
     }
@@ -43,6 +46,7 @@ public class DuelsCommand implements TabExecutor {
             case "accept" -> this.acceptSubcommand.execute(sender, args[0], args);
             case "deny" -> this.denySubcommand.execute(sender, args[0], args);
             case "kit" -> this.kitSubcommand.execute(sender, args[0], args);
+            case "arena" -> this.arenaSubcommand.execute(sender, args[0], args);
             case "reload" -> this.reloadSubcommand.execute(sender, args[0], args);
             default -> this.unknownSubcommand.execute(sender, args[0], args);
         };
@@ -50,12 +54,13 @@ public class DuelsCommand implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        final List<String> suggestions = args.length == 1 ? sender.hasPermission(this.adminPermission) ? List.of("challenge", "accept", "deny", "kit", "reload") : List.of("challenge", "accept", "deny", "kit") :
+        final List<String> suggestions = args.length == 1 ? sender.hasPermission(this.adminPermission) ? List.of("challenge", "accept", "deny", "kit", "arena", "reload") : List.of("challenge", "accept", "deny", "kit", "arena") :
                 args.length > 1 ? switch (args[0].toLowerCase()) {
                     case "challenge" -> this.challengeSubcommand.tabComplete(sender, args[0], args);
                     case "accept" -> this.acceptSubcommand.tabComplete(sender, args[0], args);
                     case "deny" -> this.denySubcommand.tabComplete(sender, args[0], args);
                     case "kit" -> this.kitSubcommand.tabComplete(sender, args[0], args);
+                    case "arena" -> this.arenaSubcommand.tabComplete(sender, args[0], args);
                     default -> this.unknownSubcommand.tabComplete(sender, args[0], args);
                 } : this.unknownSubcommand.tabComplete(sender, args[0], args);
         return suggestions.stream().filter(s -> s.regionMatches(true, 0, args[args.length - 1], 0, args[args.length - 1].length())).collect(Collectors.toList());

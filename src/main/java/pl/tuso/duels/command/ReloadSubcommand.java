@@ -22,7 +22,8 @@ public class ReloadSubcommand implements PaperSubcommand {
         }
         this.duels.reloadConfig();
         this.duels.getMessages().reload();
-        this.duels.getGameSystem().getGameKitManager().reloadKits();
+        this.duels.getGameSystem().getKitManager().reloadKits();
+        this.duels.getGameSystem().getArenaManager().reloadArenas();
         sender.sendMessage(this.duels.getMessages().getLine("command.reload.success"));
         return true;
     }
