@@ -30,7 +30,7 @@ public class KitLoadSubcommand implements PaperSubcommand {
         if (args.length != 3) return this.unknownSubcommand.execute(sender, subCommand, args);
         final String fileName = args[2].contains(".yml") ? args[2] : args[2].concat(".yml");
         try {
-            if (this.duels.getGameSystem().getGameKitManager().loadKit(fileName)) sender.sendMessage(this.duels.getMessages().getLine("command.kit.load.success", fileName));
+            if (this.duels.getGameSystem().getKitManager().loadKit(fileName)) sender.sendMessage(this.duels.getMessages().getLine("command.kit.load.success", fileName));
             else sender.sendMessage(this.duels.getMessages().getLine("command.kit.load.fail", fileName));
             return true;
         } catch (Exception exception) {
@@ -44,6 +44,6 @@ public class KitLoadSubcommand implements PaperSubcommand {
     public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
         final List<String> suggestions = List.of(new File(this.duels.getDataFolder(), "kits").list());
-        return suggestions.stream().filter(s -> !this.duels.getGameSystem().getGameKitManager().getKits().stream().anyMatch(kit -> kit.getFile().getName().equalsIgnoreCase(s))).collect(Collectors.toList());
+        return suggestions.stream().filter(s -> !this.duels.getGameSystem().getKitManager().getKits().stream().anyMatch(kit -> kit.getFile().getName().equalsIgnoreCase(s))).collect(Collectors.toList());
     }
 }

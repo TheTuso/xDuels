@@ -43,12 +43,12 @@ public class ChallengeSubcommand implements PaperSubcommand {
             String name = "";
             for (int i = 2; i < args.length; i++) name += args[i] + " ";
             name = name.trim();
-            final Kit kit = this.duels.getGameSystem().getGameKitManager().getKit(name);
+            final Kit kit = this.duels.getGameSystem().getKitManager().getKit(name);
             if (kit == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.unknown.kit", name));
                 return false;
             }
-            final Challenge challenge = this.duels.getGameSystem().getGameChallengeManager().createChallange(whoGamePlayer, whomGamePlayer, kit);
+            final Challenge challenge = this.duels.getGameSystem().getChallengeManager().createChallange(whoGamePlayer, whomGamePlayer, kit);
             if (challenge == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.challenge.duplicate", name));
                 return false;
@@ -67,7 +67,7 @@ public class ChallengeSubcommand implements PaperSubcommand {
                 if (sender instanceof Player self) return !s.equalsIgnoreCase(self.getName()); // True if doesn't match
                 return true;
             }).collect(Collectors.toList());
-            case 3 -> this.duels.getGameSystem().getGameKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
+            case 3 -> this.duels.getGameSystem().getKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
             default -> PaperSubcommand.super.tabComplete(sender, subCommand, args);
         };
     }

@@ -1,7 +1,6 @@
 package pl.tuso.duels.command.kit;
 
 import io.papermc.paper.command.PaperSubcommand;
-import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,7 @@ public class KitSaveSubcommand implements PaperSubcommand {
             for (int i = 2; i < args.length; i++) serializedName += args[i] + " ";
             serializedName = serializedName.trim();
             final GameKit gameKit = new GameKit(serializedName, player.getInventory());
-            if (this.duels.getGameSystem().getGameKitManager().saveKit(gameKit)) {
+            if (this.duels.getGameSystem().getKitManager().saveKit(gameKit)) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.kit.save.success", gameKit.getSerializedName()));
                 return true;
             } else {

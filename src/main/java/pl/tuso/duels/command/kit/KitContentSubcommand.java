@@ -8,10 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import pl.tuso.duels.Duels;
 import pl.tuso.duels.api.Kit;
 import pl.tuso.duels.command.UnknownSubcommand;
-import pl.tuso.duels.game.GameKit;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +29,7 @@ public class KitContentSubcommand implements PaperSubcommand {
         for (int i = 2; i < args.length; i++) name += args[i] + " ";
         name = name.trim();
         final String finalName = name;
-        final Kit kit = this.duels.getGameSystem().getGameKitManager().getKit(finalName);
+        final Kit kit = this.duels.getGameSystem().getKitManager().getKit(finalName);
         if (kit == null) {
             sender.sendMessage(this.duels.getMessages().getLine("command.unknown.kit", finalName));
             return false;
@@ -45,6 +43,6 @@ public class KitContentSubcommand implements PaperSubcommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
-        return this.duels.getGameSystem().getGameKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
+        return this.duels.getGameSystem().getKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
     }
 }

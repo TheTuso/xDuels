@@ -24,7 +24,7 @@ class GameChallenge implements Challenge {
 
     @Override
     public boolean accept() { //TODO accept system -> create game
-        this.duels.getGameSystem().getGameChallengeManager().getChallenges().remove(this);
+        this.duels.getGameSystem().getChallengeManager().getChallenges().remove(this);
         this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         return false;
@@ -32,7 +32,7 @@ class GameChallenge implements Challenge {
 
     @Override
     public boolean deny() {
-        this.duels.getGameSystem().getGameChallengeManager().getChallenges().remove(this);
+        this.duels.getGameSystem().getChallengeManager().getChallenges().remove(this);
         this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.denied.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.denied.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         return false;

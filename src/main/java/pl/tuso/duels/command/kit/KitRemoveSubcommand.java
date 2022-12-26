@@ -31,17 +31,16 @@ public class KitRemoveSubcommand implements PaperSubcommand {
         String name = "";
         for (int i = 2; i < args.length; i++) name += args[i] + " ";
         name = name.trim();
-        final String finalName = name;
-        final Kit kit = this.duels.getGameSystem().getGameKitManager().getKit(finalName);
+        final Kit kit = this.duels.getGameSystem().getKitManager().getKit(name);
         if (kit == null) {
-            sender.sendMessage(this.duels.getMessages().getLine("command.unknown.kit", finalName));
+            sender.sendMessage(this.duels.getMessages().getLine("command.unknown.kit", name));
             return false;
         }
-        if (this.duels.getGameSystem().getGameKitManager().removeKit(kit)) {
-            sender.sendMessage(this.duels.getMessages().getLine("command.kit.remove.success", finalName));
+        if (this.duels.getGameSystem().getKitManager().removeKit(kit)) {
+            sender.sendMessage(this.duels.getMessages().getLine("command.kit.remove.success", name));
             return true;
         } else {
-            sender.sendMessage(this.duels.getMessages().getLine("command.kit.remove.fail", finalName));
+            sender.sendMessage(this.duels.getMessages().getLine("command.kit.remove.fail", name));
             return false;
         }
     }
@@ -49,6 +48,6 @@ public class KitRemoveSubcommand implements PaperSubcommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
-        return this.duels.getGameSystem().getGameKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
+        return this.duels.getGameSystem().getKitManager().getKits().stream().map(kit -> kit.getPlainName()).collect(Collectors.toList());
     }
 }

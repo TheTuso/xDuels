@@ -38,12 +38,12 @@ public class DenySubcommand implements PaperSubcommand {
             String name = "";
             for (int i = 2; i < args.length; i++) name += args[i] + " ";
             name = name.trim();
-            final Kit kit = this.duels.getGameSystem().getGameKitManager().getKit(name);
+            final Kit kit = this.duels.getGameSystem().getKitManager().getKit(name);
             if (kit == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.unknown.kit", name));
                 return false;
             }
-            final Challenge challenge = this.duels.getGameSystem().getGameChallengeManager().getChallenge(senderGamePlayer, receiverGamePlayer, kit);
+            final Challenge challenge = this.duels.getGameSystem().getChallengeManager().getChallenge(senderGamePlayer, receiverGamePlayer, kit);
             if (challenge == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.unknown.challenge"));
                 return false;
@@ -60,12 +60,12 @@ public class DenySubcommand implements PaperSubcommand {
         if (sender instanceof Player player) {
             final GamePlayer whom = GamePlayer.getInstance(player.getUniqueId());
             return switch (args.length) {
-                case 2 -> this.duels.getGameSystem().getGameChallengeManager().getChallengesReceivedBy(whom).stream().map(challange -> challange.getSender().getHandle().getName()).collect(Collectors.toList());
+                case 2 -> this.duels.getGameSystem().getChallengeManager().getChallengesReceivedBy(whom).stream().map(challange -> challange.getSender().getHandle().getName()).collect(Collectors.toList());
                 case 3 -> {
                     final UUID uuid = this.duels.getServer().getPlayerUniqueId(args[1]);
                     if (uuid == null) yield PaperSubcommand.super.tabComplete(sender, subCommand, args);
                     final GamePlayer who = GamePlayer.getInstance(uuid);
-                    yield this.duels.getGameSystem().getGameChallengeManager().getChallengesSendBy(who).stream().map(challange -> challange.getKit().getPlainName()).collect(Collectors.toList());
+                    yield this.duels.getGameSystem().getChallengeManager().getChallengesSendBy(who).stream().map(challange -> challange.getKit().getPlainName()).collect(Collectors.toList());
                 }
                 default -> PaperSubcommand.super.tabComplete(sender, subCommand, args);
             };

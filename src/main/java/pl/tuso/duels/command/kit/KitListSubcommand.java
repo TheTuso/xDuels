@@ -19,7 +19,7 @@ public class KitListSubcommand implements PaperSubcommand {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, String subCommand, String[] args) {
-        final List<Kit> kits = this.duels.getGameSystem().getGameKitManager().getKits();
+        final List<Kit> kits = this.duels.getGameSystem().getKitManager().getKits();
         sender.sendMessage(this.duels.getMessages().getLine("command.kit.list.title", kits.size()));
         kits.forEach(kit -> sender.sendMessage(this.duels.getMessages().getLine("command.kit.list.element", kit.getSerializedName())
                 .hoverEvent(HoverEvent.showText(this.duels.getMessages().getLine("command.kit.list.hover", kit.getSerializedName())))
