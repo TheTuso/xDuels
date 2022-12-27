@@ -41,8 +41,8 @@ public class KitLoadSubcommand implements PaperSubcommand {
     }
 
     @Override
-    public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
-        if (args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
+    public List<String> tabComplete(@NotNull CommandSender sender, String subCommand, String @NotNull [] args) {
+        if (!sender.hasPermission(this.adminPermission) || args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
         final List<String> suggestions = List.of(new File(this.duels.getDataFolder(), "kits").list());
         return suggestions.stream().filter(s -> !this.duels.getGameSystem().getKitManager().getKits().stream().anyMatch(kit -> kit.getFile().getName().equalsIgnoreCase(s))).collect(Collectors.toList());
     }

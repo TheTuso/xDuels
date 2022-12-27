@@ -46,8 +46,8 @@ public class ArenaRemoveSubcommand implements PaperSubcommand {
     }
 
     @Override
-    public List<String> tabComplete(CommandSender sender, String subCommand, String @NotNull [] args) {
-        if (args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
+    public List<String> tabComplete(@NotNull CommandSender sender, String subCommand, String @NotNull [] args) {
+        if (!sender.hasPermission(this.adminPermission) || args.length != 3) return PaperSubcommand.super.tabComplete(sender, subCommand, args);
         return this.duels.getGameSystem().getArenaManager().getArenas().stream().map(arena -> arena.getPlainName()).collect(Collectors.toList());
     }
 }
