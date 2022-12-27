@@ -1,19 +1,23 @@
 package pl.tuso.duels.game;
 
 import org.bukkit.entity.Player;
-import pl.tuso.duels.api.Battle;
-import pl.tuso.duels.api.GameState;
+import pl.tuso.duels.api.*;
 
 import java.util.List;
 
 public class GameBattle implements Battle {
+    private final Arena arena;
+    private final Kit kit;
+    private final DuelPlayer red;
+    private final DuelPlayer blue;
     private GameState gameState;
-    private final Player red;
-    private final Player blue;
 
-    public GameBattle(Player red, Player blue) { // TODO arena, kit
+    public GameBattle(Arena arena, Kit kit, DuelPlayer red, DuelPlayer blue) {
+        this.arena = arena;
+        this.kit = kit;
         this.red = red;
         this.blue = blue;
+        this.setGameState(GameState.STARTING);
     }
 
     @Override
@@ -37,22 +41,32 @@ public class GameBattle implements Battle {
     }
 
     @Override
+    public Arena getArena() {
+        return this.arena;
+    }
+
+    @Override
+    public Kit getKit() {
+        return this.kit;
+    }
+
+    @Override
     public GameState getGameState() {
         return this.gameState;
     }
 
     @Override
-    public Player getRedPlayer() {
+    public DuelPlayer getRedPlayer() {
         return this.red;
     }
 
     @Override
-    public Player getBluePlayer() {
+    public DuelPlayer getBluePlayer() {
         return this.blue;
     }
 
     @Override
-    public List<Player> getPlayers() {
+    public List<DuelPlayer> getPlayers() {
         return List.of(this.red, this.blue);
     }
 }
