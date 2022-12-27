@@ -26,15 +26,15 @@ public class GameBattle implements Battle {
         this.gameState = gameState;
         switch (gameState) {
             case STARTING -> {
-                // TODO Starting
+                // TODO Starting (provide players, build fake walls, load kits, start counting)
                 break;
             }
             case FIGHT -> {
-                // TODO Fighting
+                // TODO Fighting (destroy fake walls)
                 break;
             }
             case END -> {
-                // TODO Ending
+                // TODO Ending (load backups, teleport players back)
                 break;
             }
         }

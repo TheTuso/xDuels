@@ -1,6 +1,4 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-import java.util.Date
-import java.text.SimpleDateFormat
 
 plugins {
     id("java-library")
