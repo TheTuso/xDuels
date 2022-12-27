@@ -1,7 +1,7 @@
 system:
   hello: Hello!
 command:
-  permission: <color:#FF1B1C>You do not have the <white>%2$s</white> permission to run the <white>%1$s</white> command</color>
+  permission: <color:#FF1B1C>You do not have the <white>%2$s</white> permission to run the <white>%1$s</white> command!</color>
   unknown:
     label: <color:#FF1B1C>This command doesn't exist, or does it?</color>
     kit: <color:#FF1B1C>Kit <white>%s</white> doesn't exist, or does it?</color>
