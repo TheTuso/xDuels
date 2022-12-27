@@ -5,21 +5,25 @@ import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.title.Title;
 import org.bukkit.scheduler.BukkitRunnable;
 import pl.tuso.duels.Duels;
+import pl.tuso.duels.api.Battle;
 import pl.tuso.duels.api.Countdown;
 import pl.tuso.duels.api.DuelPlayer;
+import pl.tuso.duels.api.GameState;
 
 import java.time.Duration;
 import java.util.List;
 
 public class GameCountdown implements Countdown {
     private final Duels duels;
+    private final Battle battle;
     private final int time;
     private final List<DuelPlayer> audience;
     private final BukkitRunnable timer;
     private boolean running;
 
-    public GameCountdown(Duels duels, int time, DuelPlayer... audience) {
+    public GameCountdown(Duels duels, Battle battle, int time, DuelPlayer... audience) {
         this.duels = duels;
+        this.battle = battle;
         this.time = time;
         this.audience = List.of(audience);
         this.timer = new BukkitRunnable() {
@@ -45,6 +49,7 @@ public class GameCountdown implements Countdown {
     public void stop() {
         if (!this.running) return;
         this.timer.cancel();
+        this.battle.setGameState(GameState.FIGHT);
     }
 
     @Override
