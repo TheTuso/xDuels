@@ -43,7 +43,7 @@ public class GameCountdown implements Countdown {
     public void start() {
         if (this.running) return;
         this.running = true;
-        this.timer.runTaskTimerAsynchronously(this.duels, 0, 20);
+        this.timer.runTaskTimer(this.duels, 0, 20);
 
     }
 
