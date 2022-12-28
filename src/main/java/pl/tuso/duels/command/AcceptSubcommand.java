@@ -28,10 +28,6 @@ public class AcceptSubcommand implements PaperSubcommand {
         if (sender instanceof Player receiver) {
             if (args.length < 3) return this.unknownSubcommand.execute(sender, subCommand, args);
             final DuelPlayer receiverDuelPlayer = this.duels.getGameSystem().getPlayerManager().getDuelPlayer(receiver.getUniqueId());
-            if (receiverDuelPlayer.isFighting()) {
-                sender.sendMessage(this.duels.getMessages().getLine("command.fighting"));
-                return false;
-            }
             final DuelPlayer senderDuelPlayer = this.duels.getGameSystem().getPlayerManager().getDuelPlayer(this.duels.getServer().getPlayerUniqueId(args[1]));
             if (senderDuelPlayer == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.unknown.player", args[1]));

@@ -5,9 +5,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.tuso.duels.Duels;
+import pl.tuso.duels.api.DuelPlayer;
 import pl.tuso.duels.command.arena.ArenaSubcommand;
 import pl.tuso.duels.command.kit.KitSubcommand;
 
@@ -40,6 +42,13 @@ public class DuelsCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        if (sender instanceof Player player) {
+            final DuelPlayer duelPlayer = this.duels.getGameSystem().getPlayerManager().getDuelPlayer(player.getUniqueId());
+            if (duelPlayer.isFighting()) {
+                sender.sendMessage(this.duels.getMessages().getLine("command.fighting"));
+                return false;
+            }
+        }
         if (args.length == 0) return this.unknownSubcommand.execute(sender, "unknown", args);
         return switch (args[0].toLowerCase()) {
             case "challenge" -> this.challengeSubcommand.execute(sender, args[0], args);
