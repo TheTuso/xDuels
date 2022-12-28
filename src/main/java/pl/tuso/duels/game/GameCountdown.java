@@ -31,8 +31,8 @@ public class GameCountdown implements Countdown {
 
             @Override
             public void run() {
-                if (this.currentTime < 0) GameCountdown.this.stop();
                 GameCountdown.this.count(this.currentTime);
+                if (this.currentTime <= 0) GameCountdown.this.stop();
                 this.currentTime--;
             }
         };
@@ -42,12 +42,15 @@ public class GameCountdown implements Countdown {
     @Override
     public void start() {
         if (this.running) return;
+        this.running = true;
         this.timer.runTaskTimerAsynchronously(this.duels, 0, 20);
+
     }
 
     @Override
     public void stop() {
         if (!this.running) return;
+        this.running = false;
         this.timer.cancel();
         this.battle.setGameState(GameState.FIGHT);
     }
@@ -59,7 +62,7 @@ public class GameCountdown implements Countdown {
 
     private void count(int time) {
         this.audience.forEach(duelPlayer -> {
-            if (time > 10) {
+            if (time > 5) {
                 if (time % 10 == 0) {
                     duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.countdown.chat", time));
                     duelPlayer.getHandle().playSound(Sound.sound(Key.key("minecraft:block.note_block.guitar"), Sound.Source.MASTER, 100.0F, 0.0F));

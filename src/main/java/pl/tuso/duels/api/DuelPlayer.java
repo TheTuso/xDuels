@@ -8,9 +8,11 @@ import java.util.UUID;
 public interface DuelPlayer {
     boolean isFighting();
 
-    boolean loadKit(Kit kit);
+    void setFighting(boolean fighting);
 
-    boolean loadInventoryBackup();
+    boolean loadState(Kit kit);
+
+    boolean loadStateBackup();
 
     UUID getUuid();
 

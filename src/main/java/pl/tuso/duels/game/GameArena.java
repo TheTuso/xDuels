@@ -59,12 +59,14 @@ public class GameArena implements Arena {
     public void buildFakeWalls(DuelPlayer... duelPlayers) {
         final BlockData blockData = Material.BARRIER.createBlockData();
         Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
     }
 
     @Override
     public void destroyFakeWalls(DuelPlayer... duelPlayers) {
         final BlockData blockData = Material.AIR.createBlockData();
         Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
     }
 
     @Override
@@ -80,10 +82,11 @@ public class GameArena implements Arena {
     @Contract(pure = true)
     private @NotNull Set<Location> getWallsFor(Location spawn) {
         final HashSet<Location> locations = new HashSet<>();
-        for (int x = -1; x == 1; x++)
-            for (int y = 0; y == 2; y++)
-                for (int z = -1; z == 1; z++) {
-                    final Location location = spawn.add(x, y, z);
+        for (int x = -1; x <= 1; x++)
+            for (int y = 0; y <= 2; y++)
+                for (int z = -1; z <= 1; z++) {
+                    final Location location = spawn.clone().add(x, y, z);
+                    if (location.equals(spawn) || location.equals(spawn.clone().add(0, 1, 0))) continue;
                     if (spawn.getWorld().getBlockData(location).getMaterial().isEmpty()) locations.add(location);
                 }
         return locations;

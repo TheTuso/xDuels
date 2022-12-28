@@ -1,5 +1,7 @@
 package pl.tuso.duels.api;
 
+import org.bukkit.Location;
+
 public interface System {
     DuelPlayerManager getPlayerManager();
 
@@ -8,4 +10,8 @@ public interface System {
     ArenaManager getArenaManager();
 
     ChallengeManager getChallengeManager();
+
+    BattleManager getBattleManager();
+
+    Lobby getLobby();
 }

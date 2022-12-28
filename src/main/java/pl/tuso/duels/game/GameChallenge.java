@@ -26,7 +26,8 @@ class GameChallenge implements Challenge {
     public boolean accept() { //TODO accept system -> create game
         this.sender.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.sender", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
         this.receiver.getHandle().sendMessage(this.duels.getMessages().getLine("command.challenge.accepted.receiver", this.sender.getSerializedDisplayName(), this.receiver.getSerializedDisplayName(), this.kit.getSerializedName()));
-        return this.duels.getGameSystem().getChallengeManager().getChallenges().remove(this);
+        this.duels.getGameSystem().getChallengeManager().getChallenges().remove(this);
+        return this.duels.getGameSystem().getBattleManager().createBattle(this.sender, this.receiver, this.kit);
     }
 
     @Override

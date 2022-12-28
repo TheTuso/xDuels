@@ -25,7 +25,7 @@ public class ChallengeSubcommand implements PaperSubcommand {
     @Override
     public boolean execute(CommandSender sender, String subCommand, String @NotNull [] args) {
         if (sender instanceof Player who) {
-            if (args.length < 3) return this.unknownSubcommand.execute(sender, subCommand, args);
+            if (args.length < 3) return this.unknownSubcommand.execute(sender, "label", args);
             final Player whom = this.duels.getServer().getPlayer(args[1]);
             if (whom == null) {
                 sender.sendMessage(this.duels.getMessages().getLine("command.unknown.player", args[1]));

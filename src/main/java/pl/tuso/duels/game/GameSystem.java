@@ -1,5 +1,6 @@
 package pl.tuso.duels.game;
 
+import org.bukkit.Location;
 import pl.tuso.duels.Duels;
 import pl.tuso.duels.api.*;
 import pl.tuso.duels.api.System;
@@ -10,6 +11,8 @@ public class GameSystem implements System {
     private final GameKitManager gameKitManager;
     private final GameArenaManager gameArenaManager;
     private final GameChallengeManager gameChallengeManager;
+    private final GameBattleManager gameBattleManager;
+    private final GameLobby gameLobby;
 
     public GameSystem(Duels duels) {
         this.duels = duels;
@@ -17,6 +20,8 @@ public class GameSystem implements System {
         this.gameKitManager = new GameKitManager(this.duels);
         this.gameArenaManager = new GameArenaManager(this.duels);
         this.gameChallengeManager = new GameChallengeManager(this.duels);
+        this.gameBattleManager = new GameBattleManager(this.duels);
+        this.gameLobby = new GameLobby(this.duels);
     }
 
     @Override
@@ -37,5 +42,15 @@ public class GameSystem implements System {
     @Override
     public ChallengeManager getChallengeManager() {
         return this.gameChallengeManager;
+    }
+
+    @Override
+    public BattleManager getBattleManager() {
+        return this.gameBattleManager;
+    }
+
+    @Override
+    public Lobby getLobby() {
+        return this.gameLobby;
     }
 }
