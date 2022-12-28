@@ -22,6 +22,8 @@ public class GameSystem implements System {
         this.gameChallengeManager = new GameChallengeManager(this.duels);
         this.gameBattleManager = new GameBattleManager(this.duels);
         this.gameLobby = new GameLobby(this.duels);
+
+        this.duels.getServer().getPluginManager().registerEvents(new GameListener(this.duels), this.duels);
     }
 
     @Override
