@@ -1,9 +1,8 @@
 package pl.tuso.duels.game;
 
-import org.bukkit.Location;
 import pl.tuso.duels.Duels;
-import pl.tuso.duels.api.*;
 import pl.tuso.duels.api.System;
+import pl.tuso.duels.api.*;
 
 public class GameSystem implements System {
     private final Duels duels;
@@ -22,7 +21,6 @@ public class GameSystem implements System {
         this.gameChallengeManager = new GameChallengeManager(this.duels);
         this.gameBattleManager = new GameBattleManager(this.duels);
         this.gameLobby = new GameLobby(this.duels);
-
         this.duels.getServer().getPluginManager().registerEvents(new GameListener(this.duels), this.duels);
     }
 
