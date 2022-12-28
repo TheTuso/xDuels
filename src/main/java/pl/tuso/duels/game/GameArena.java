@@ -87,7 +87,7 @@ public class GameArena implements Arena {
                 for (int z = -1; z <= 1; z++) {
                     final Location location = spawn.clone().add(x, y, z);
                     if (location.equals(spawn) || location.equals(spawn.clone().add(0, 1, 0))) continue;
-                    if (spawn.getWorld().getBlockData(location).getMaterial().isEmpty()) locations.add(location);
+                    if (spawn.getWorld().getBlockData(location).getMaterial().isEmpty() || spawn.getWorld().getBlockData(location).getMaterial() == Material.BARRIER) locations.add(location);
                 }
         return locations;
     }
