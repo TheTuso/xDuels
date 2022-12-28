@@ -38,7 +38,7 @@ public class KitSubcommand implements PaperSubcommand {
             case "load" -> this.kitLoadSubcommand.execute(sender, args[1].toLowerCase(), args);
             case "list" -> this.kitListSubcommand.execute(sender, args[1].toLowerCase(), args);
             case "content" -> this.kitContentSubcommand.execute(sender, args[1].toLowerCase(), args);
-            default -> this.unknownSubcommand.execute(sender, args[1].toLowerCase(), args);
+            default -> this.unknownSubcommand.execute(sender, "label", args);
         };
     }
 
