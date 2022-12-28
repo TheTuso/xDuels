@@ -1,4 +1,5 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
+import java.io.ByteArrayOutputStream
 
 plugins {
     id("java-library")
@@ -43,6 +44,7 @@ bukkit {
     main = "pl.tuso.duels.Duels"
     apiVersion = "1.19"
     authors = listOf("tuso")
+    version = getVersion().toString() + String.format(" (Git → %s)", getGitHash())
 
     commands {
         register("duels") {
@@ -50,4 +52,13 @@ bukkit {
             aliases = listOf("duel")
         }
     }
+}
+
+fun getGitHash(): String {
+    val stdout = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-parse", "--short", "HEAD")
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
 }
