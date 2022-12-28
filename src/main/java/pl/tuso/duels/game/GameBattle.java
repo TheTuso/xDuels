@@ -1,9 +1,13 @@
 package pl.tuso.duels.game;
 
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.title.Title;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import pl.tuso.duels.Duels;
 import pl.tuso.duels.api.*;
 
+import java.time.Duration;
 import java.util.List;
 
 public class GameBattle implements Battle {
@@ -47,7 +51,14 @@ public class GameBattle implements Battle {
             }
             case FIGHT -> {
                 this.arena.destroyWalls(this.red, this.blue);
-                this.getPlayers().forEach(duelPlayer -> duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.fight")));
+                this.getPlayers().forEach(duelPlayer -> {
+                    duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.fight.chat"));
+                    duelPlayer.getHandle().showTitle(Title.title(
+                            this.duels.getMessages().getLine("battle.fight.title"),
+                            this.duels.getMessages().getLine("battle.fight.subtitle"),
+                            Title.Times.times(Duration.ZERO, Duration.ofSeconds(1), Duration.ofSeconds(1))));
+                    duelPlayer.getHandle().playSound(Sound.sound(Key.key("minecraft:entity.generic.explode"), Sound.Source.MASTER, 4.0F, 1.0F));
+                });
             }
             case END -> {
                 this.getPlayers().forEach(duelPlayer -> {
