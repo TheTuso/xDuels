@@ -56,17 +56,17 @@ public class GameArena implements Arena {
     }
 
     @Override
-    public void buildFakeWalls(DuelPlayer... duelPlayers) {
+    public void buildWalls(DuelPlayer... duelPlayers) {
         final BlockData blockData = Material.BARRIER.createBlockData();
-        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
-        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().getWorld().setBlockData(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().getWorld().setBlockData(location, blockData)));
     }
 
     @Override
-    public void destroyFakeWalls(DuelPlayer... duelPlayers) {
+    public void destroyWalls(DuelPlayer... duelPlayers) {
         final BlockData blockData = Material.AIR.createBlockData();
-        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
-        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().sendBlockChange(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.redLocation).forEach(location -> duelPlayer.getHandle().getWorld().setBlockData(location, blockData)));
+        Arrays.stream(duelPlayers).forEach(duelPlayer -> this.getWallsFor(this.blueLocation).forEach(location -> duelPlayer.getHandle().getWorld().setBlockData(location, blockData)));
     }
 
     @Override

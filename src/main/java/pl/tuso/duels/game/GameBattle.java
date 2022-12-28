@@ -35,7 +35,7 @@ public class GameBattle implements Battle {
         this.gameState = gameState;
         switch (gameState) {
             case STARTING -> {
-                this.arena.buildFakeWalls(this.red, this.blue);
+                this.arena.buildWalls(this.red, this.blue);
                 this.red.getHandle().teleport(this.arena.getRedSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 this.blue.getHandle().teleport(this.arena.getBlueSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 this.countdown.start();
@@ -46,7 +46,7 @@ public class GameBattle implements Battle {
                 });
             }
             case FIGHT -> {
-                this.arena.destroyFakeWalls(this.red, this.blue);
+                this.arena.destroyWalls(this.red, this.blue);
                 this.getPlayers().forEach(duelPlayer -> duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.fight")));
             }
             case END -> {

@@ -16,9 +16,9 @@ public interface Arena {
 
     Location getBlueSpawn();
 
-    void buildFakeWalls(DuelPlayer... duelPlayers);
+    void buildWalls(DuelPlayer... duelPlayers);
 
-    void destroyFakeWalls(DuelPlayer... duelPlayers);
+    void destroyWalls(DuelPlayer... duelPlayers);
 
     void setFile(File file);
 
