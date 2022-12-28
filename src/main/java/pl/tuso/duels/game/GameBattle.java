@@ -1,5 +1,6 @@
 package pl.tuso.duels.game;
 
+import com.google.common.base.Preconditions;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.title.Title;
@@ -77,6 +78,7 @@ public class GameBattle implements Battle {
                 } else {
                     this.duels.getLogger().warning("No one won???");
                 }
+                this.duels.getGameSystem().getBattleManager().getBattles().remove(this);
             }
         }
     }
@@ -96,6 +98,7 @@ public class GameBattle implements Battle {
         return this.gameState;
     }
 
+
     @Override
     public DuelPlayer getRedPlayer() {
         return this.red;
@@ -109,5 +112,17 @@ public class GameBattle implements Battle {
     @Override
     public List<DuelPlayer> getPlayers() {
         return this.players;
+    }
+
+    @Override
+    public void setWinner(DuelPlayer duelPlayer) {
+        Preconditions.checkArgument(this.players.contains(duelPlayer), "The winner must take part in the battle, not some random guy you give!");
+        this.winner = duelPlayer;
+    }
+
+    @Override
+    public DuelPlayer getWinner() {
+        Preconditions.checkNotNull(this.winner, "No one won yet!");
+        return this.winner;
     }
 }

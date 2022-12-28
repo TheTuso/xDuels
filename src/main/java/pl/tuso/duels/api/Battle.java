@@ -18,4 +18,8 @@ public interface Battle {
     List<DuelPlayer> getPlayers();
 
     GameState getGameState();
+
+    void setWinner(DuelPlayer duelPlayer);
+
+    DuelPlayer getWinner();
 }
