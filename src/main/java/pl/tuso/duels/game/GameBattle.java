@@ -11,6 +11,7 @@ import pl.tuso.duels.api.*;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameBattle implements Battle {
     private final Duels duels;
@@ -49,7 +50,9 @@ public class GameBattle implements Battle {
                     duelPlayer.loadState(this.kit);
                     duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.starting"));
                 });
-                this.duels.getServer().getOnlinePlayers().forEach(player -> this.players.forEach(duelPlayer -> duelPlayer.getHandle().hidePlayer(this.duels, player)));
+                this.duels.getServer().getOnlinePlayers().forEach(player -> this.players.forEach(duelPlayer -> {
+                    if (!this.players.stream().map(mapper -> mapper.getHandle()).collect(Collectors.toList()).contains(player)) duelPlayer.getHandle().hidePlayer(this.duels, player);
+                }));
             }
             case FIGHT -> {
                 this.getPlayers().forEach(duelPlayer -> {
