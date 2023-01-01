@@ -26,6 +26,10 @@ public class GameListener implements Listener { // TODO interactions??
         final DuelPlayer duelPlayer = this.duels.getGameSystem().getPlayerManager().getDuelPlayer(playerJoinEvent.getPlayer().getUniqueId());
         duelPlayer.getHandle().teleport(this.duels.getGameSystem().getLobby().getLobbyLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
         duelPlayer.getHandle().getInventory().clear();
+        this.duels.getServer().getOnlinePlayers().forEach(player -> {
+            final DuelPlayer other = this.duels.getGameSystem().getPlayerManager().getDuelPlayer(player.getUniqueId());
+            if (other.isFighting()) other.getHandle().hidePlayer(this.duels, duelPlayer.getHandle());
+        });
         playerJoinEvent.joinMessage(this.duels.getMessages().getLine("system.join", duelPlayer.getSerializedDisplayName()));
     }
 

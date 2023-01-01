@@ -49,6 +49,7 @@ public class GameBattle implements Battle {
                     duelPlayer.loadState(this.kit);
                     duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.starting"));
                 });
+                this.duels.getServer().getOnlinePlayers().forEach(player -> this.players.forEach(duelPlayer -> duelPlayer.getHandle().hidePlayer(this.duels, player)));
             }
             case FIGHT -> {
                 this.getPlayers().forEach(duelPlayer -> {
@@ -75,6 +76,7 @@ public class GameBattle implements Battle {
                 }
                 this.duels.getGameSystem().getBattleManager().getBattles().remove(this);
                 this.countdown.stop();
+                this.duels.getServer().getOnlinePlayers().forEach(player -> this.players.forEach(duelPlayer -> duelPlayer.getHandle().showPlayer(this.duels, player)));
             }
         }
     }
