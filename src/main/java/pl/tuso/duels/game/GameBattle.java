@@ -67,13 +67,9 @@ public class GameBattle implements Battle {
                     duelPlayer.loadStateBackup();
                 });
                 if (this.winner != null) {
-                    if (this.winner.equals(this.red)) {
-                        this.red.getHandle().sendMessage(this.duels.getMessages().getLine("battle.win"));
-                        this.blue.getHandle().sendMessage(this.duels.getMessages().getLine("battle.defeat"));
-                    } else {
-                        this.blue.getHandle().sendMessage(this.duels.getMessages().getLine("battle.win"));
-                        this.red.getHandle().sendMessage(this.duels.getMessages().getLine("battle.defeat"));
-                    }
+                    final DuelPlayer loser = this.winner.equals(this.red) ? this.blue : this.red;
+                    this.winner.getHandle().sendMessage(this.duels.getMessages().getLine("battle.win", loser.getSerializedDisplayName()));
+                    loser.getHandle().sendMessage(this.duels.getMessages().getLine("battle.defeat", this.winner.getSerializedDisplayName()));
                 } else {
                     this.duels.getLogger().warning("No one won???");
                 }
