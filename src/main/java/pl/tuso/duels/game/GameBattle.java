@@ -3,6 +3,7 @@ package pl.tuso.duels.game;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import pl.tuso.duels.Duels;
@@ -40,7 +41,6 @@ public class GameBattle implements Battle {
         this.gameState = gameState;
         switch (gameState) {
             case STARTING -> {
-                this.arena.buildWalls(this.red, this.blue);
                 this.red.getHandle().teleport(this.arena.getRedSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 this.blue.getHandle().teleport(this.arena.getBlueSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
                 this.countdown.start();
@@ -51,7 +51,6 @@ public class GameBattle implements Battle {
                 });
             }
             case FIGHT -> {
-                this.arena.destroyWalls(this.red, this.blue);
                 this.getPlayers().forEach(duelPlayer -> {
                     duelPlayer.getHandle().sendMessage(this.duels.getMessages().getLine("battle.fight.chat"));
                     duelPlayer.getHandle().showTitle(Title.title(
