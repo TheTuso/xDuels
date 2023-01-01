@@ -44,10 +44,10 @@ public class GamePlayer implements DuelPlayer {
         this.inventoryBackup.clear();
         for (int i = 0; i < player.getInventory().getSize(); i++) this.inventoryBackup.put(i, player.getInventory().getItem(i));
         for (int i = 0; i < player.getInventory().getSize(); i++) player.getInventory().setItem(i, kit.getEquipment().get(i));
-
         this.gameMode = player.getGameMode();
         player.setGameMode(GameMode.SURVIVAL);
         if (player.isFlying()) this.getHandle().setFlying(false);
+        this.health = player.getHealth();
         player.setHealth(20.0F);
         return true;
     }
@@ -55,11 +55,8 @@ public class GamePlayer implements DuelPlayer {
     @Override
     public boolean loadStateBackup() {
         final Player player = this.getHandle();
-        if (!player.isOnline()) return false;
         for (int i = 0; i < player.getInventory().getSize(); i++) player.getInventory().setItem(i, this.inventoryBackup.get(i));
-
         player.setGameMode(this.gameMode);
-        player.setHealth(this.health);
         return true;
     }
 
