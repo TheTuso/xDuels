@@ -32,7 +32,10 @@ public class GameCountdown implements Countdown {
             @Override
             public void run() {
                 GameCountdown.this.count(this.currentTime);
-                if (this.currentTime <= 0) GameCountdown.this.stop();
+                if (this.currentTime <= 0) {
+                    GameCountdown.this.stop();
+                    GameCountdown.this.battle.setGameState(GameState.FIGHT);
+                }
                 this.currentTime--;
             }
         };
@@ -52,7 +55,6 @@ public class GameCountdown implements Countdown {
         if (!this.running) return;
         this.running = false;
         this.timer.cancel();
-        this.battle.setGameState(GameState.FIGHT);
     }
 
     @Override

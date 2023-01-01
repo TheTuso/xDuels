@@ -8,7 +8,7 @@ command:
     player: <color:#FF1B1C>Player <white>%s</white> doesn't exist, or does it?</color>
     challenge: <color:#FF1B1C>This challenge has expired!</color>
   reload:
-    success: <color:#64D039>Configuration files have been reloaded!</color>
+    success: <color:#6AF266>Configuration files have been reloaded!</color>
   kit:
     list:
       title: <color:#F3DE2C>Available kits <white>[%d]</white>:</color>
@@ -18,13 +18,13 @@ command:
       title: <color:#F3DE2C>The contents of the <white>%s</white> kit <white>[%d]</white>:</color>
       element: → %s
     load:
-      success: <color:#64D039>The kit was successfully loaded from the <white>%s</white>!</color>
+      success: <color:#6AF266>The kit was successfully loaded from the <white>%s</white>!</color>
       fail: <color:#FF1B1C>Couldn't load kit from <white>%s</white>!</color>
     remove:
-      success: <color:#64D039>Kit <white>%s</white> has been successfully removed!</color>
+      success: <color:#6AF266>Kit <white>%s</white> has been successfully removed!</color>
       fail: <color:#FF1B1C>Couldn't remove kit <white>%s</white>!</color>
     save:
-      success: <color:#64D039>Kit <white>%s</white> has been successfully saved!</color>
+      success: <color:#6AF266>Kit <white>%s</white> has been successfully saved!</color>
       fail: <color:#FF1B1C>Couldn't save kit <white>%s</white>!</color>
   challenge:
     self: <color:#FF1B1C>You can't challenge yourself to a battle!</color>
@@ -34,14 +34,14 @@ command:
       receiver: <br><color:#F3DE2C>Player <white>%1$s</white> challenged you to a battle with kit <white>%3$s</white>!</color><br>%4$s<reset> | %5$s<reset>
       button:
         accept:
-          display: <color:#64D039><bold>ACCEPT</bold></color>
-          hover: <color:#64D039>Click to accept the battle!</color>
+          display: <color:#6AF266><bold>ACCEPT</bold></color>
+          hover: <color:#6AF266>Click to accept the battle!</color>
         deny:
           display: <color:#FF1B1C><bold>DENY</bold></color>
           hover: <color:#FF1B1C>Click to deny the battle!</color>
     accepted:
-      sender: <br><color:#64D039>Player <white>%2$s</white> accepted the battle with kit <white>%3$s</white>!</color>
-      receiver: <br><color:#64D039>You accepted the battle from <white>%1$s</white> with kit <white>%3$s</white>!</color>
+      sender: <br><color:#6AF266>Player <white>%2$s</white> accepted the battle with kit <white>%3$s</white>!</color>
+      receiver: <br><color:#6AF266>You accepted the battle from <white>%1$s</white> with kit <white>%3$s</white>!</color>
     denied:
       sender: <br><color:#FF1B1C>Player <white>%2$s</white> denied the battle with kit <white>%3$s</white>!</color>
       receiver: <br><color:#FF1B1C>You denied the battle from <white>%1$s</white> with kit <white>%3$s</white>!</color>

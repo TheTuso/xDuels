@@ -74,6 +74,7 @@ public class GameBattle implements Battle {
                     this.duels.getLogger().warning("No one won???");
                 }
                 this.duels.getGameSystem().getBattleManager().getBattles().remove(this);
+                this.countdown.stop();
             }
         }
     }
