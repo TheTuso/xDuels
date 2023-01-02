@@ -1,7 +1,10 @@
 system:
   hello: Hello!
+  join: <color:#6AF266>%s</color> <white>has joined to the battle arena</white>!
+  quit: <color:#FF1B1C>%s</color> <white>has left from the battle arena</white>!
 command:
   permission: <color:#FF1B1C>You do not have the <white>%2$s</white> permission to run the <white>%1$s</white> command!</color>
+  fighting: <color:#FF1B1C>Finish the battle first before you do anything!</color>
   unknown:
     label: <color:#FF1B1C>This command doesn't exist, or does it?</color>
     kit: <color:#FF1B1C>Kit <white>%s</white> doesn't exist, or does it?</color>
@@ -45,3 +48,15 @@ command:
     denied:
       sender: <br><color:#FF1B1C>Player <white>%2$s</white> denied the battle with kit <white>%3$s</white>!</color>
       receiver: <br><color:#FF1B1C>You denied the battle from <white>%1$s</white> with kit <white>%3$s</white>!</color>
+battle:
+  win: <br><color:#6AF266>Nice! You won with <white>%s</white>!</color>
+  defeat: <br><color:#FF1B1C>Ouch... You lost to <white>%s</white>.</color>
+  starting: <color:#F3DE2C>The battle is about to begin!</color>
+  countdown:
+    chat: <color:#F3DE2C>The battle will start in <white>%s</white> seconds!</color>
+    title: <color:#F3DE2C>The battle will start in</color>
+    subtitle: <white>%s</white>
+  fight:
+    chat: <color:#F3DE2C>To the battle!</color>
+    title: <color:#F3DE2C>To the battle!</color>
+    subtitle: <white>Good luck!</white>
